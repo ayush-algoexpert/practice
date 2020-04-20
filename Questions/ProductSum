@@ -1,0 +1,17 @@
+def productSum(array):
+    # Write your code here.
+    depth =1
+	product =depth
+	sum =0
+	return productSumHelper(array,depth,product,sum)
+
+def productSumHelper(array, depth, product, sum):
+	for x in array:
+		if(isinstance(x,list)):
+			#found array, calculate its sum first
+			newDepth = depth+1
+			newProduct = product*newDepth
+			sum = productSumHelper(x,newDepth,newProduct,sum)
+		else:
+			sum += x*product
+	return sum		
