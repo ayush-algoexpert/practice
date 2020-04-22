@@ -1,0 +1,62 @@
+# Solution 1
+
+def findThreeLargestNumbers(array):
+    # Write your code here.
+    # create an output array
+	outArray = [array[0], array[1], array[2]]
+	# add the first three elements in sorted order
+	if(outArray[0] > outArray[1]):
+		temp = outArray[0]
+		outArray[0] = outArray[1]
+		outArray[1] = temp
+	if(outArray[1] > outArray[2]):
+		temp = outArray[1]
+		outArray[1] = outArray[2]
+		outArray[2] = temp
+	if(outArray[0] > outArray[1]):
+		temp = outArray[0]
+		outArray[0] = outArray[1]
+		outArray[1] = temp
+	# loop through the entire array adding the numbers on the go
+	for x in range(3,len(array)):
+		outArray = sortingOutArray(outArray, array[x])
+	# output the array
+	return outArray
+
+def sortingOutArray(outArray, candidate):
+	if(candidate < outArray[0]):
+		return outArray
+	elif(candidate < outArray[1]):
+		outArray[0] = candidate
+		return outArray
+	elif(candidate < outArray[2]):
+		outArray[0] = outArray[1]
+		outArray[1] = candidate
+		return outArray
+	else:
+		outArray[0] = outArray[1]
+		outArray[1] = outArray[2]
+		outArray[2] = candidate
+		return outArray
+    
+# Solution 2
+
+def findThreeLargestNumbers(array):
+    # Write your code here.
+    largestThree = [None, None, None]
+	for x in array:
+		if largestThree[2] is None or x > largestThree[2]:
+			shiftAndUpdate(largestThree, x, 2)
+		elif(largestThree[1] is None or x > largestThree[1]):
+			shiftAndUpdate(largestThree, x, 1)		
+		elif(largestThree[0] is None or x > largestThree[0]):
+			shiftAndUpdate(largestThree, x, 0)
+	return largestThree		
+			
+def shiftAndUpdate(array, candidate, index):		
+	for i in range(0, index + 1):
+		if(i == index):
+			array[i] = candidate
+		else:
+			array[i] = array[i+1]
+	return array	
