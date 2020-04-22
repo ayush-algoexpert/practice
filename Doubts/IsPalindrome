@@ -1,2 +1,5 @@
 # the time complexity of creating an array of characters and then doing a recursive call on that array should be 
 # O(n) but the solution states O(n^2)
+#
+
+# tail recursion should be taken care of to optimize the space complexity
