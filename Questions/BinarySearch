@@ -1,0 +1,18 @@
+def binarySearch(array, target):
+    # Write your code here.
+	left = 0
+	right = len(array) - 1
+	if(target == array[right]):
+		return right
+	while(right - left !=1 and target != array[left]):
+		middle = (left + right ) // 2
+		if(target > array[middle]):
+			left = middle
+		elif(target < array[middle]):
+			right = middle
+		elif(target == array[middle]):
+			return middle
+	
+	return -1
+
+ 		
