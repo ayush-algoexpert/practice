@@ -1,0 +1,2 @@
+# the time complexity of creating an array of characters and then doing a recursive call on that array should be 
+# O(n) but the solution states O(n^2)
