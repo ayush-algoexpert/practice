@@ -1,0 +1,96 @@
+# Solution 1
+# O(n^2) Time | O(n) Space
+def threeNumberSum(array, targetSum):
+    # Write your code here.
+	arrayTriplets = []
+  array.sort()
+	for x in range(len(array)):
+		twoNumberTarget = targetSum - array[x]
+		arrayDuplets = twoNumberSum(array, x, twoNumberTarget)
+		if arrayDuplets:
+			for pair in arrayDuplets:
+				arrayTriplets.append([array[x], pair[0], pair[1]])
+	if arrayTriplets:
+		for triplets in arrayTriplets:
+			triplets.sort()
+		arrayTriplets.sort()
+		uniqueArrayTriplets = []
+		for x in range(len(arrayTriplets)):
+			if(x % 6 == 0):
+				uniqueArrayTriplets.append(arrayTriplets[x])
+		return uniqueArrayTriplets
+	else:
+		return []
+	
+def twoNumberSum(array, omitIndex, targetSum):
+	arrayDuplets = []
+	for x in range(len(array) - 1):
+		if(x != omitIndex):
+			potentialNumber = targetSum - array[x]
+			if potentialNumber in array:
+				y = array.index(potentialNumber)
+				if y != omitIndex and y != x:
+					arrayDuplets.append([array[x], potentialNumber])
+	for duplets in arrayDuplets:
+		duplets.sort()
+	arrayDuplets.sort()
+	return arrayDuplets
+  
+# Solution 2
+# O(n^2) Time | O(n) Space
+def threeNumberSum(array, targetSum):
+    # Write your code here.
+	arrayTriplets = []
+    array.sort()
+	for x in range(len(array)):
+		twoNumberTarget = targetSum - array[x]
+		arrayDuplets = twoNumberSum(array, x, twoNumberTarget)
+		if arrayDuplets:
+			for pair in arrayDuplets:
+				arrayTriplets.append([array[x], pair[0], pair[1]])
+	if arrayTriplets:
+		for triplets in arrayTriplets:
+			triplets.sort()
+		arrayTriplets.sort()
+		uniqueArrayTriplets = []
+		for x in range(len(arrayTriplets)):
+			if(x % 6 == 0):
+				uniqueArrayTriplets.append(arrayTriplets[x])
+		return uniqueArrayTriplets
+	else:
+		return []
+	
+def twoNumberSum(array, omitIndex, targetSum):
+	arrayDuplets = []
+	for x in range(len(array) - 1):
+		if(x != omitIndex):
+			potentialNumber = targetSum - array[x]
+			if potentialNumber in array:
+				y = array.index(potentialNumber)
+				if y != omitIndex and y != x:
+					arrayDuplets.append([array[x], potentialNumber])
+	for duplets in arrayDuplets:
+		duplets.sort()
+	arrayDuplets.sort()
+	return arrayDuplets
+
+# Solution 3
+def threeNumberSum(array, targetSum):
+    # Write your code here.
+	triplets = []
+	array.sort()
+    for i in range(len(array) - 2):
+		left = i + 1
+		right = len(array) - 1
+		while(left < right):
+			currentSum = array[i] + array[left] + array[right]
+			if currentSum == targetSum:
+				triplets.append([array[i], array[left], array[right]])
+				left += 1
+				right -= 1
+			elif currentSum < targetSum:
+				left += 1
+			elif currentSum > targetSum:
+				right -= 1
+	return triplets 
+  
