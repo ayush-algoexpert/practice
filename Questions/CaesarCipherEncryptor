@@ -1,0 +1,30 @@
+# Solution 1
+# Time O(n) n = len(string) | Space O(n)
+def caesarCipherEncryptor(string, key):
+    # Write your code here.
+	alphabets = 'abcdefghijklmnopqrstuvwxyz'
+	key = key % 26
+	stringArray = list(string)
+	for i in range(len(stringArray)):
+		charIndex = alphabets.index(stringArray[i])
+		cipherIndex = charIndex + key
+		if(cipherIndex > 25):
+			cipherIndex = cipherIndex - 26
+		stringArray[i] = alphabets[cipherIndex]
+	return ''.join(stringArray)
+  
+# Solution 2
+# Time O(n) n = len(string) | Space O(n)
+def caesarCipherEncryptor(string, key):
+    # Write your code here.
+	key = key % 26
+	stringArray = list(string)
+	for i in range(len(stringArray)):
+		cipherIndex = getCipherIndex(stringArray[i], key)
+		stringArray[i] = chr(cipherIndex)
+	return ''.join(stringArray)
+
+def getCipherIndex(letter, key):
+	charAscii = ord(letter)
+	cipherIndex = charAscii + key
+	return cipherIndex if cipherIndex <=122 else cipherIndex - 26
