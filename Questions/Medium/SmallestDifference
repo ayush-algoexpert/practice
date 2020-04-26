@@ -1,0 +1,45 @@
+# Solution 1
+#O(n*m) Time average | O(1) Space
+# O(n)logn + O(m)logm Time Best | O(1) Space
+def smallestDifference(arrayOne, arrayTwo):
+    # Write your code here.
+	arrayOne.sort()
+	arrayTwo.sort()
+	smallestDif = abs(arrayOne[0] - arrayTwo[0])
+	closestPair = [arrayOne[0], arrayTwo[0]]
+    for x in range(len(arrayOne)):
+		y = 0
+		previousDif = None
+		currentDif = abs(arrayTwo[0] - arrayOne[x])
+		while y < len(arrayTwo) and (previousDif is None or currentDif <= previousDif):
+			if currentDif < smallestDif:
+				smallestDif = currentDif
+				closestPair = [arrayOne[x], arrayTwo[y]]
+			previousDif = currentDif
+			y += 1
+			if y != len(arrayTwo):
+				currentDif = abs(arrayTwo[y] - arrayOne[x])
+	return closestPair
+  
+# Solution 2
+# O(n)logn + O(m)logm Time | O(n) Space
+def smallestDifference(arrayOne, arrayTwo):
+    # Write your code here.
+    arrayOne.sort()
+	arrayTwo.sort()
+	left = 0
+	right = 0
+	smallestDif = float("inf")
+	closestPair = [arrayOne[left], arrayTwo[right]]
+	while left < len(arrayOne) and right < len(arrayTwo):
+		currentDif = abs(arrayOne[left] - arrayTwo[right])
+		if currentDif <= smallestDif:
+			smallestDif = currentDif
+			closestPair = [arrayOne[left], arrayTwo[right]]
+		if smallestDif == 0:
+			return closestPair
+		elif(arrayOne[left] > arrayTwo[right]):
+			right += 1
+		else:
+			left += 1
+	return closestPair
