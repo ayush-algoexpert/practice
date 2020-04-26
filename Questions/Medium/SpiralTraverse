@@ -1,0 +1,125 @@
+# Solution 1
+#O(n) Time | O(n) Space
+def spiralTraverse(array):
+    # Write your code here.
+    spiralValues = []
+	firstRow = 0
+	lastRow = len(array) - 1
+	firstColumn = 0
+	lastColumn = len(array[0]) - 1
+	while(firstRow < lastRow and firstColumn < lastColumn):
+		i = firstRow
+		j = firstColumn
+		while j <= lastColumn:
+			spiralValues.append(array[i][j])
+			j += 1
+		j = lastColumn
+		i += 1
+		while i <= lastRow:
+			spiralValues.append(array[i][j])
+			i += 1
+		i = lastRow
+		j = lastColumn - 1
+		while j >= firstColumn:
+			spiralValues.append(array[i][j])
+			j -= 1
+		j = firstColumn
+		i = lastRow - 1
+		while i > firstRow:
+			spiralValues.append(array[i][j])
+			i -= 1
+		firstRow += 1
+		lastRow -= 1
+		firstColumn += 1
+		lastColumn -= 1
+	if firstRow == lastRow:
+		j = firstColumn
+		while j <= lastColumn:
+			spiralValues.append(array[firstRow][j])
+			j += 1
+	elif firstColumn == lastColumn and firstRow != lastRow:
+		i = firstRow
+		while i <= lastRow:
+			spiralValues.append(array[i][firstColumn])
+			i += 1
+	return spiralValues
+# Solution 2
+#O(n) Time | O(n) Space
+def spiralTraverse(array):
+    # Write your code here.
+    spiralValues = []
+	firstRow = 0
+	lastRow = len(array) - 1
+	firstColumn = 0
+	lastColumn = len(array[0]) - 1
+	while(firstRow < lastRow and firstColumn < lastColumn):
+		i = firstRow
+		j = firstColumn
+		for j in range(firstColumn, lastColumn + 1):
+			spiralValues.append(array[i][j])
+		
+		j = lastColumn
+		for i in range(firstRow + 1, lastRow + 1):
+			spiralValues.append(array[i][j])
+		
+		i = lastRow
+		for j in reversed(range(firstColumn, lastColumn)):
+			spiralValues.append(array[i][j])
+		
+		j = firstColumn
+		for i in reversed(range(firstRow + 1, lastRow)):
+			spiralValues.append(array[i][j])
+
+		firstRow += 1
+		lastRow -= 1
+		firstColumn += 1
+		lastColumn -= 1
+		
+	if firstRow == lastRow:
+		for j in range(firstColumn, lastColumn + 1):
+			spiralValues.append(array[firstRow][j])
+
+	elif firstColumn == lastColumn and firstRow != lastRow:
+		for i in range(firstRow, lastRow + 1):
+			spiralValues.append(array[i][firstColumn])
+
+	return spiralValues
+# Solution 3
+#O(n) Time | O(n) Space
+def spiralTraverse(array):
+    # Write your code here.
+	return spiralValuesHelper([], 0, 0, len(array) - 1, len(array[0]) - 1, array)
+
+def spiralValuesHelper(spiralValues, firstRow, firstColumn, lastRow, lastColumn, array):
+	if firstRow > lastRow or firstColumn > lastColumn:
+		return spiralValues
+	
+	if firstRow == lastRow:
+		for j in range(firstColumn, lastColumn + 1):
+			spiralValues.append(array[firstRow][j])
+		return spiralValues
+
+	elif firstColumn == lastColumn and firstRow != lastRow:
+		for i in range(firstRow, lastRow + 1):
+			spiralValues.append(array[i][firstColumn])
+		return spiralValues
+	
+	else:	
+		i = firstRow
+		j = firstColumn
+		for j in range(firstColumn, lastColumn + 1):
+			spiralValues.append(array[i][j])
+		
+		j = lastColumn
+		for i in range(firstRow + 1, lastRow + 1):
+			spiralValues.append(array[i][j])
+		
+		i = lastRow
+		for j in reversed(range(firstColumn, lastColumn)):
+			spiralValues.append(array[i][j])
+		
+		j = firstColumn
+		for i in reversed(range(firstRow + 1, lastRow)):
+			spiralValues.append(array[i][j])
+	
+		return spiralValuesHelper(spiralValues, firstRow + 1, firstColumn + 1, lastRow - 1, lastColumn - 1, array)
