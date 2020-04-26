@@ -1,0 +1,20 @@
+# O(n) Time | O(1) space
+def isMonotonic(array):
+    # Write your code here.
+	if len(array) <= 1:
+		return True
+    first = array[0]
+	last = array[len(array) - 1]
+	if last == first:
+		for x in range(len(array) - 2):
+			if array[x + 1] != array[x]:
+				return False
+	elif last > first:
+		for x in range(len(array) - 2):
+			if array[x + 1] < array[x]:
+				return False
+	else:
+		for x in range(len(array) - 2):
+			if array[x + 1] > array[x]:
+				return False
+	return True
