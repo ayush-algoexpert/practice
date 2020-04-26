@@ -1,0 +1,27 @@
+# Solution 1
+# Space: O(1) | Time: O(n)
+def isPalindrome(string):
+    # Write your code here.
+	left = 0
+	right = len(string) - 1
+	while(left <= right):
+		if(string[left] != string[right]):
+			return False
+		left += 1
+		right -= 1
+	return True
+  
+  # Solution 2
+  # Tail recursion O(n) Time |  Space: O(1) if compiler optimizes it else O(n)
+def isPalindrome(string):
+    # Write your code here.
+	return isPalindromeHelper(string, 0, len(string) - 1)
+
+def isPalindromeHelper(string, i, j):
+	#base case
+	if(j <= i):
+		return True
+	elif(j > i and string[i] != string[j]):
+		return False
+	else:
+		return isPalindromeHelper(string, i + 1, j - 1)
