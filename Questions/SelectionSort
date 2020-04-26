@@ -1,0 +1,13 @@
+# O(n^2) Time | O(1) Space
+def selectionSort(array):
+    # Write your code here.
+    for y in range(len(array) - 1):
+		updateUpto = y
+		for x in range(y + 1, len(array)):
+			if(array[updateUpto] > array[x]):
+				updateUpto = x
+		swap(array, y, array[updateUpto], updateUpto)
+	return array
+
+def swap(array, index, value, updateUpto):
+		array[index], array[updateUpto] = array[updateUpto], array[index]
